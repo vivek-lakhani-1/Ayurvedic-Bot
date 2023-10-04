@@ -1,7 +1,6 @@
 langchain
 pypdf
 pinecone-client
-google-generativeai
 requests
 BeautifulSoup
 spacy
