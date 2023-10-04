@@ -2,7 +2,7 @@ langchain
 pypdf
 pinecone-client
 requests
-BeautifulSoup
+beautifulsoup4
 spacy
 django
 decouple
