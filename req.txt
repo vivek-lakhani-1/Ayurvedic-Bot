@@ -5,7 +5,7 @@ requests
 beautifulsoup4
 spacy
 django
-decouple
+python-decouple
 django-jazzmin
 djangorestframework
 markdown
