@@ -13,3 +13,4 @@ django-filter
 Pillow
 cryptography
 gunicorn
+django-cors-headers
