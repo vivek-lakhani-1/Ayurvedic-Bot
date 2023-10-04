@@ -1,0 +1,15 @@
+langchain
+pypdf
+pinecone-client
+google-generativeai
+requests
+BeautifulSoup
+spacy
+django
+decouple
+jazzmin
+djangorestframework
+markdown
+django-filter
+Pillow
+cryptography
