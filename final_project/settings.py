@@ -140,13 +140,13 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 CORS_ALLOWED_ORIGINS = [
-    'https://1740-136-232-1-166.ngrok-free.app',
+    'https://ayurvedic-bot.onrender.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://1740-136-232-1-166.ngrok-free.app',
+    'https://ayurvedic-bot.onrender.com',
 ]
-CORS_ORIGIN_WHITELIST = ('https://1740-136-232-1-166.ngrok-free.app')
+CORS_ORIGIN_WHITELIST = ('https://ayurvedic-bot.onrender.com')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
