@@ -1,0 +1,8 @@
+previewsEnabled: true
+services:
+  - type: web
+    plan: standard
+    name: app
+    env: 
+      - type: python
+        PYTHON_VERSION: 3.11
