@@ -6,7 +6,7 @@ beautifulsoup4
 spacy
 django
 decouple
-jazzmin
+django-jazzmin
 djangorestframework
 markdown
 django-filter
