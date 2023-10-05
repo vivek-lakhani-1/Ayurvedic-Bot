@@ -4,7 +4,7 @@ pinecone-client
 requests
 BeautifulSoup
 spacy
-django
+Django
 python-decouple
 google-generativeai==0.2.0
 django-jazzmin
