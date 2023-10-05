@@ -1,4 +1,4 @@
-# from langchain.document_loaders import PyPDFDirectoryLoader
+from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import GooglePalmEmbeddings
 from langchain.llms import GooglePalm
@@ -102,11 +102,11 @@ def webscrapping(query):
     return retrieve_data(query,data)
 
 
-# loader = PyPDFDirectoryLoader("pdfs")
-# data = loader.load()
+loader = PyPDFDirectoryLoader("pdfs")
+data = loader.load()
 
-# text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
-# text_chunks = text_splitter.split_documents(data)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
+text_chunks = text_splitter.split_documents(data)
 
 embeddings=GooglePalmEmbeddings()
 

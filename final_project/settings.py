@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -139,14 +139,11 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
-CORS_ALLOWED_ORIGINS = [
-    'https://ayurvedic-bot.onrender.com',
-]
+CORS_ALLOWED_ORIGINS = True
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://ayurvedic-bot.onrender.com',
-]
-CORS_ORIGIN_WHITELIST = ('https://ayurvedic-bot.onrender.com')
+
+CSRF_TRUSTED_ORIGINS = True
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
