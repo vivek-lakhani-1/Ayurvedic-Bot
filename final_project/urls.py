@@ -21,6 +21,8 @@ from medical_bot import urls as medical_url
 from image_process import urls as image_url
 from login import urls as loginurl
 from login import views as loginviews
+from django.conf.urls import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +33,5 @@ urlpatterns = [
 ]
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns # new
-urlpatterns += staticfiles_urlpatterns() # new
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
