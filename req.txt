@@ -466,13 +466,6 @@ tensorboard==2.13.0
 tensorboard-data-server==0.7.1
 tensorflow==2.13.0
 tensorflow-estimator==2.13.0
-tensorflow-macos==2.13.0
-termcolor==2.3.0
-terminado==0.17.1
-text-generation==0.6.0
-textstat==0.7.3
-thinc==8.1.12
-threadpoolctl==3.2.0
 tiktoken==0.4.0
 timm==0.9.7
 tinycss2==1.2.1
