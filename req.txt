@@ -15,3 +15,5 @@ Pillow
 cryptography
 gunicorn
 django-cors-headers
+pysqlite3
+db-sqlite3
