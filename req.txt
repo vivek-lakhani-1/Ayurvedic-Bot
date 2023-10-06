@@ -1,4 +1,4 @@
-langchain
+django-cors-headerslangchain
 pypdf
 pinecone-client
 requests
