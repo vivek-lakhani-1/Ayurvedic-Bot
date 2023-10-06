@@ -1,2 +1,2 @@
 pip install -r req.txt
-python3 manage.py collectstatic
+python3.9 manage.py collectstatic
