@@ -21,5 +21,6 @@ urlpatterns = [
     path('/email_validation/<str:cipher_text>',views.Validate_email_Link),
     path('/resend_verification_link',views.resend_email_verify),
     path('/reset_password_',views.reset_password_link_gen),
-    path('/reset_password_/<str:cipher_text>',views.reset_password)
+    path('/reset_password_/<str:cipher_text>',views.reset_password),
+    path('/check_register',views.check_register)
 ]

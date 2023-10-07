@@ -49,9 +49,9 @@ def Register_Data(request):
             else:
                 if('email' in serializer._errors):
                     if (serializer._errors['email'][0].code == 'unique'):
-                        return response.Response({'status': 409,'message':"Emaild Id Exist"},status=status.HTTP_409_CONFLICT)
+                        return response.Response({'status': 409,'message':"Emaild Id Exist"})
                 else:
-                    return response.Response({'status': 400,'message':serializer.errors},status=status.HTTP_400_BAD_REQUEST)
+                    return response.Response({'status': 400,'message':"Error Occured"})
         else: 
             return response.Response({'status': 400,'message':"Please Enter Valid Details"},status=status.HTTP_400_BAD_REQUEST)
             
@@ -59,17 +59,16 @@ def Register_Data(request):
 def login_(request):
     data = request.data
     try:
-        print(data)
         query = Registration_Database.objects.filter(email=data['username']).values()[0]
         if(query['is_verified']==True):
             if(query['password']==data['password']):
                 return response.Response({'status':200,'message':'Password matched; login successful!'},status=status.HTTP_200_OK)
             else:
-                return response.Response({'status':400,'message':'The entered passwords do not match.'},status=status.HTTP_400_BAD_REQUEST)
+                return response.Response({'status':400,'message':'The entered passwords do not match.'})
         else:
-            return response.Response({'status':422,'message':'Please ensure your email address is verified.'},status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return response.Response({'status':422,'message':'Please ensure your email address is verified.'})
     except:
-        return response.Response({'status':404,'message':'Email Id Not Exist'},status=status.HTTP_404_NOT_FOUND)
+        return response.Response({'status':404,'message':'Email Id Not Exist'})
 
 @api_view(['POST'])
 def resend_email_verify(request):
@@ -78,8 +77,9 @@ def resend_email_verify(request):
         if(filter.exists()):
             if(filter.values()[0]['is_verified'] == False):
                 try:
-                    pass
-                    # Validate_Email(request.data['email'])
+                    my_thread = threading.Thread(target=Validate_Email, args=(request.data['email'],))
+                    my_thread.start()
+                    return response.Response({'status':200,'message':'Email Verification Link Sended. Please Check Your Inbox.'},status=status.HTTP_200_OK)
                 except:
                     return response.Response({'status':404,'message':'Email is not Valid'},status=status.HTTP_200_OK)
                 return response.Response({'status':200,'message':'Email Verification Link Sended. Please Check Your Inbox.'},status=status.HTTP_200_OK)
@@ -93,18 +93,19 @@ def resend_email_verify(request):
 
 @api_view(['POST'])     
 def reset_password_link_gen(request):
-    if('email' in request.data):
-        filter = Registration_Database.objects.filter(email = request.data['email'])
+    if('username' in request.data):
+        filter = Registration_Database.objects.filter(email = request.data['username'])
         if(filter.exists()):
             if(filter.values()[0]['is_verified'] == False):
                 return response.Response({'status':200,'message':'Please Verify Your Email First !!'},status=status.HTTP_200_OK)
             else:
-                Reset_Password(request.data['email'])
+                my_thread = threading.Thread(target=Reset_Password, args=(request.data['username'],))
+                my_thread.start()
                 return response.Response({'status':200,'message':'Password Reset Link Sent to Your Regiser Mail Id'},status=status.HTTP_200_OK)
         else:
-             return response.Response({'status':400,'message':'Email Address Not Found.'},status=status.HTTP_400_BAD_REQUEST)
+             return response.Response({'status':400,'message':'Email Address Not Found.'})
     else:
-             return response.Response({'status':401,'message':'Email Id Not Exists Please Register First'},status=status.HTTP_401_UNAUTHORIZED)
+             return response.Response({'status':401,'message':'Email Id Not Exists Please Register First'})
         
   
 def reset_password(request,cipher_text):
@@ -114,7 +115,7 @@ def reset_password(request,cipher_text):
             email = decrypted_text.decode('utf-8')
             query = Registration_Database.objects.get(email=email)
             if(query != None):
-                query.Password = request.POST.get('Password')
+                query.password = request.POST.get('Password')
                 query.save()
                 prm = {
                     'title' : 'Password Updated',
@@ -130,11 +131,13 @@ def reset_password(request,cipher_text):
 @api_view(['POST'])
 def check_register(request):
     try:
-        data = str(request.data['data'])
-        print(data)
-        data = data.split("||")
-        flg = Registration_Database.objects.filter(email = data[0],Password=data[1]).exists()
-        return response.Response({'msg':flg},status=status.HTTP_200_OK)
+        flg = Registration_Database.objects.filter(email = request.data['email'])
+        flg = flg.exists()
+        if(flg):
+            verified = Registration_Database.objects.filter(email = request.data['email']).values()[0]['is_verified']
+            return response.Response({'msg':flg,'verified':verified},status=status.HTTP_200_OK)
+        else:
+            return response.Response({'error':'Not Exist'})
     except:
-        return response.Response({'error':'Not Exist'},status=status.HTTP_400_BAD_REQUEST)
+        return response.Response({'error':'Not Exist'})
 
