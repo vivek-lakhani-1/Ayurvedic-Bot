@@ -35,6 +35,7 @@ def bot_req(request):
                 query = data['query']
                 resp = requests.post(internal_api_url,data={'email': email})
                 data = resp.json()
+                print(data)
                 if(data['msg']):
                     if(data['verified']):
                         result = query_search(query)
