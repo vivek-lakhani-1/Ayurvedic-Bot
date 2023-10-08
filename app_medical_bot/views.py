@@ -8,12 +8,33 @@ from .models import Register_Data as Registration_Database
 from .serializer import Serializingdata
 from .custom_functions import Validate_Email,Reset_Password
 import threading
-
+from decouple import config
+import requests
 
 key = str(config('key'))
 key = key.encode()
 cipher_suite = Fernet(key)
 
+url = config('BOT_URL')
+
+def query_search(query):
+    data = {
+        'query': query
+    }
+
+    headers = {
+        'Content-Type': 'application/json',
+    }
+
+    try:
+        resp2 = requests.post(url, json=data, headers=headers)
+        if resp2.status_code == 200:
+            return resp2.json()['message']
+        else:
+            return None
+
+    except:
+        return None
 
 @api_view(['GET'])
 def Validate_email_Link(request,cipher_text):
@@ -133,11 +154,36 @@ def check_register(request):
     try:
         flg = Registration_Database.objects.filter(email = request.data['email'])
         flg = flg.exists()
+        print(flg)
         if(flg):
             verified = Registration_Database.objects.filter(email = request.data['email']).values()[0]
+            print(verified)
             return response.Response({'msg':flg,'verified':verified['is_verified']},status=status.HTTP_200_OK)
         else:
             return response.Response({'error':'Not Exist'})
     except:
         return response.Response({'error':'Not Exist'})
 
+
+@api_view(['POST'])
+def bot_req(request):
+    try:
+                data = request.data
+                email = data['email']
+                query = data['query']
+                flg = Registration_Database.objects.filter(email = email)
+                flg = flg.exists()
+                if(flg):
+                    verified = Registration_Database.objects.filter(email = email).values()[0]
+                    if(verified['is_verified']):
+                            result = query_search(query)
+                            if(result != None):
+                                    return response.Response({'status':200,'message':result},status=status.HTTP_200_OK)
+                            else:
+                                    return response.Response({'status':404,'message':'Email is not Valid'})
+                    else:
+                        return response.Response({'status':200,'message':"Please Verify Your Email Address"})
+                else:
+                        return response.Response({'status':404,'message':'Email is not Valid'})
+    except:
+            return response.Response({'status':500,'message':"Error Occured"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)

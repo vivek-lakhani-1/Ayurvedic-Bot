@@ -39,9 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'medical_bot',
+    'app_medical_bot',
     'corsheaders',
-    'login',
     'image_process'
 ]
 

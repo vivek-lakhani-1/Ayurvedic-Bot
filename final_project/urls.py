@@ -17,14 +17,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
-from medical_bot import urls as medical_url
 from image_process import urls as image_url
-from login import urls as loginurl
-from login import views as loginviews
+from app_medical_bot import urls as loginurl
+from app_medical_bot import views as loginviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('bot_url',include(medical_url)),
+    path('bot_url',loginviews.bot_req),
     path('register',include(loginurl)),
     path('login',loginviews.login_),
     path('image_process',include(image_url))
