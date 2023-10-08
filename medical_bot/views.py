@@ -33,6 +33,7 @@ def bot_req(request):
                 data = request.data
                 email = data['email']
                 query = data['query']
+                print(query,email)
                 resp = requests.post(internal_api_url,data={'email': email})
                 data = resp.json()
                 print(data)
