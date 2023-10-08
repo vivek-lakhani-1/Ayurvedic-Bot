@@ -184,6 +184,6 @@ def bot_req(request):
                     else:
                         return response.Response({'status':200,'message':"Please Verify Your Email Address"})
                 else:
-                        return response.Response({'status':404,'message':'Email is not Valid'})
+                        return response.Response({'status':404,'message':'Please Register / Login First'})
     except:
             return response.Response({'status':500,'message':"Error Occured"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
