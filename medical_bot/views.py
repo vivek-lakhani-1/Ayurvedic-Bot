@@ -29,7 +29,7 @@ def query_search(query):
 
 @api_view(['POST'])
 def bot_req(request):
-    try:
+    # try:
                 data = request.data
                 email = data['email']
                 query = data['query']
@@ -48,7 +48,7 @@ def bot_req(request):
                         return response.Response({'status':200,'message':"Please Verify Your Email Address"})
                 else:
                         return response.Response({'status':404,'message':'Email is not Valid'})
-    except:
-            return response.Response({'status':500,'message':"Error Occured"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    # except:
+    #         return response.Response({'status':500,'message':"Error Occured"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
   
