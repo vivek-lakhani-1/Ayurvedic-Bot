@@ -135,7 +135,7 @@ def check_register(request):
         flg = flg.exists()
         if(flg):
             verified = Registration_Database.objects.filter(email = request.data['email']).values()[0]
-            return response.Response({'msg':flg,'verified':verified['verified']},status=status.HTTP_200_OK)
+            return response.Response({'msg':flg,'verified':verified['is_verified']},status=status.HTTP_200_OK)
         else:
             return response.Response({'error':'Not Exist'})
     except:
