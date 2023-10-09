@@ -13,7 +13,4 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'final_project.settings')
 
-from dozer import Dozer
-
 application = get_wsgi_application()
-application = Dozer(application)

@@ -10,4 +10,7 @@ requests
 django-cors-headers
 gunicorn
 secure-smtplib
-Dozer
+langchain
+pinecone-client
+python-decouple
+google-generativeai

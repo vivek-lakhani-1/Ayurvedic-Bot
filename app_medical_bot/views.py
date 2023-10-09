@@ -9,7 +9,7 @@ from .serializer import Serializingdata
 from .custom_functions import *
 import threading
 from decouple import config
-# from .bot_model import *
+from .bot_model import *
 
 key = str(config('key'))
 key = key.encode()
@@ -159,16 +159,16 @@ def bot_req(request):
                     verified = Registration_Database.objects.filter(email = email).values()[0]
                     print("2")
                     if(verified['is_verified']):
-                            # result = getting_data(query)
-                            result = query_search(query)
+                            result = getting_data(query)
+                            # result = query_search(query)
                             print("3")
                             if(result != None):
-                                    return response.Response({'status':200,'message':result['message']},status=status.HTTP_200_OK)
+                                    return response.Response({'status':200,'message':result},status=status.HTTP_200_OK)
                             else:
                                     return response.Response({'status':404,'message':'Error Occured While Fetching Data.'})
                     else:
                         return response.Response({'status':200,'message':"Please Verify Your Email Address"})
                 else:
-                        return response.Response({'status':404,'message':'Please Login / Register First!!'})
+                        return response.Response({'status':404,'message':'Email is not Valid'})
     except:
             return response.Response({'status':500,'message':"Error Occured"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
