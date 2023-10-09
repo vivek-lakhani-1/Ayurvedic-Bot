@@ -12,5 +12,6 @@ gunicorn
 secure-smtplib
 langchain
 pinecone-client
+psycopg2
 python-decouple
 google-generativeai
