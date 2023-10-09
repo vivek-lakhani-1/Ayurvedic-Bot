@@ -3,10 +3,13 @@ from decouple import config
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import requests
 
 key = str(config('key'))
 key = key.encode()
 cipher_suite = Fernet(key)
+
+url = config('BOT_URL')
 
 def gen_encrypted_text(email):
     text = email
@@ -99,3 +102,23 @@ def Reset_Password(email):
         print("Email sent successfully!")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
+        
+
+def query_search(query):
+    data = {
+        'query': query
+    }
+
+    headers = {
+        'Content-Type': 'application/json',
+    }
+
+    try:
+        resp2 = requests.post(url, json=data, headers=headers)
+        if resp2.status_code == 200:
+            return resp2.json()['message']
+        else:
+            return None
+
+    except:
+        return None
