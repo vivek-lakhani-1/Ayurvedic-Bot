@@ -163,11 +163,11 @@ def bot_req(request):
                             # result = query_search(query)
                             print("3")
                             if(result != None):
-                                    return response.Response({'status':200,'message':result},status=status.HTTP_200_OK)
+                                    return response.Response({'status':200,'message':result['message']},status=status.HTTP_200_OK)
                             else:
                                     return response.Response({'status':404,'message':'Error Occured While Fetching Data.'})
                     else:
-                        return response.Response({'status':200,'message':"Please Register"})
+                        return response.Response({'status':200,'message':"Please Verify Your Email Address"})
                 else:
                         return response.Response({'status':404,'message':'Please Register / Login First !!'})
     except:
