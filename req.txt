@@ -14,3 +14,5 @@ langchain
 pinecone-client
 python-decouple
 google-generativeai
+psycopg2
+Dozer
